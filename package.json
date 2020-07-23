@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/booldook/2020-kn-pb-21-node-review/issues"
   },
-  "homepage": "https://github.com/booldook/2020-kn-pb-21-node-review#readme"
+  "homepage": "https://github.com/booldook/2020-kn-pb-21-node-review#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "pug": "^3.0.0"
+  }
 }

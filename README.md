@@ -17,6 +17,7 @@ npm i -g sequelize-cli			# sequelize 프로젝트를 쉽게 만들어 줌
 ```bash
 git init
 git remote add origin 깃주소
+# .gitignore파일 생성 및 내용추가 F1 > add gitignore > node, visualstudio code
 
 # npm init -y를 실행하여 package.json을 생성
 npm init -y
@@ -45,3 +46,21 @@ npm sequelize				# Database ORM(Object-relational mapping)
 npm mongoose				# MongoDB의 접속과 명령(쿼리)을 수행하는 모듈
 ```
 
+## 3. 프로젝트 코딩
+### 생성할 폴더
+1. public > img, css, js, html
+2. views > include, layout, page...
+3. routers
+4. modules
+
+### 생성할 파일
+1. / > app.js, .env
+2. /modules > mysql-mod.js ...
+3. /routers > board-router.js ...
+4. /views/layout > default.layout.pug ...
+5. /views/include > head.inc.pug, header.inc.pug, footer.inc.pug ...
+
+### app.js 코딩
+```js
+
+```

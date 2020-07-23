@@ -13,13 +13,18 @@ app.listen(process.env.PORT, () => {
 
 
 /**************** 경로 설정 ******************/
-
+const publicPath = path.join(__dirname, './public');
+console.log(publicPath);
 
 /**************** 초기 설정 ******************/
-// app.use(express.json());
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use("/", express.static(publicPath));
+
 
 /**************** 라우터 설정 ******************/
 app.use((req, res, next) => {
+	// 이러한 무조건 통과해야 되는 라우터를 다른 말로 middleware라 한다.
 	req.booldook = 'ㅎㅎㅎ';
 	next();
 });

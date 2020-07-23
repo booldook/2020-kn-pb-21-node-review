@@ -45,3 +45,27 @@ npm morgan				# logger(사용자가 서버에 접속하여 사용한 모든 행�
 6. http - hyper text transfer protocol(port: 80)
 7. https - hyper text transfer protocol secure(port: 443)
 8. host - 컴퓨터의 IP/Domain [hostname : port(생략가능)]
+9. path - /gbook/api(pathname)?id=9(query)#page1(hash)
+10. node에서 
+```txt
+/gbook/:id -> /gbook/11 -> req.params.id
+/gbook -> /gbook?id=11 -> req.query.id
+```
+11. ftp(21) - File transfer protocol -> app: filezilla
+12. sftp(22) - secure ftp -> app: filezilla
+12. telnet(23) - remote host (원격컴퓨터)에 접근하는 프로토콜 -> app: cmd, bash, terminal(osx), putty(win)
+13. 보안tennet - ssh(22)
+14. mail(25)
+
+### 5. database 용어 정리
+0. DBMS(DataBase Management System) - MySQL/MariaDB, MSSQL, MongoDB, Oracle, PostgreSQL
+1. SQL - Structured Query Language
+2. row/record (SQL - 엑셀의 한줄-가로줄)
+3. column (SQL - 엑셀의 세로줄)
+4. table (SQL - 데이터들의 집합체 - 엑셀의 sheet)
+5. database (SQL - 테이터들의 집합인 table들의 집합체 - xlsx)
+6. document (NoSQL의 row == json)
+7. collection (NoSQL의 Table == json 덩어리들)
+8. database (NoSQL의 database)
+9. scheme - 구조
+10. ERD - Entity-Relationship Diagram - table 간의 관계도

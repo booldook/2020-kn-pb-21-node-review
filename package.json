@@ -1,0 +1,20 @@
+{
+  "name": "21.node-review",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booldook/2020-kn-pb-21-node-review.git"
+  },
+  "keywords": [],
+  "author": "booldook",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/booldook/2020-kn-pb-21-node-review/issues"
+  },
+  "homepage": "https://github.com/booldook/2020-kn-pb-21-node-review#readme"
+}

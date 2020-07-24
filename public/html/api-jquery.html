@@ -22,18 +22,36 @@
 		});
 		
 		$("#bt-post").click(function(){
-			$.post("/api/save", {
+			/* $.post("/api/save", {
 				name: "홍길동", age: 25
 			}, function(r) {
 				console.log(r);
+			}); */
+			$.ajax({
+				url: '/api/save',
+				method: 'post',
+				dataType: 'json',
+				data: {name: '홍길동', age: 25},
+				success: function(r) {
+					console.log(r);
+				}
 			});
 		});
 
 		$("#bt-post2").click(function(){
-			$.get("/api/save", {
+			/* $.get("/api/save", {
 				name: "홍길순", age: 28
 			}, function(r) {
 				console.log(r);
+			}); */
+			$.ajax({
+				url: '/api/save',
+				method: 'get',
+				dataType: 'json',
+				data: {name: '홍길순', age: 28},
+				success: function(r) {
+					console.log(r);
+				}
 			});
 		});
 	</script>

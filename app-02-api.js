@@ -3,18 +3,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 require('dotenv').config();
-const mysql = require('mysql2/promise');
-const { connect } = require('http2');
-const pool = mysql.createPool({
-	host: "localhost",
-	port: 3306,
-	user: "root",
-	password: "000000",
-	database: 'board',
-	waitForConnections: true,
-	connectionLimit: 10
-});
-
 
 /**************** 서버 실행 ******************/
 app.listen(process.env.PORT, () => { 
@@ -34,29 +22,32 @@ app.use(express.urlencoded({extended: false}));
 app.use("/", express.static(publicPath));
 
 /**************** 라우터 설정 ******************/
-
-app.get('/', (req, res, next) => {
-	let connect;
-	pool.getConnection().then((r) => {
-		connect = r;
-		return connect.query('SELECT * FROM gbook');
-	}).then((r) => {
-		connect.release();
-		res.json(r);
-	}).catch((e) => {
-		res.json(e);
-	});
+app.get("/api", (req, res, next) => {
+	const json = {
+		code: 200,
+		pager: {page: 1, lastPage: 5},
+		name: 'booldook',
+		lists: [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}]
+	}
+	res.json(json);
 });
 
-app.get('/new', async (req, res, next) => {
-	try {
-		const connect = await pool.getConnection();
-		const r = await connect.query('SELECT * FROM gbook');
-		connect.release();
-		res.json(r);
+app.post("/api/save", (req, res, next) => {
+	// let name = req.body.name;
+	// let age = req.body.age;
+	let { name, age } = req.body;
+	let json = {
+		name, age, msg: "잘 받았습니다."
 	}
-	catch(e) {
-		res.json(e);
-	}
+	res.json(json);
 });
+
+app.get("/api/save", (req, res, next) => {
+	let { name, age } = req.query;
+	let json = {
+		name, age, msg: "잘 받았습니다."
+	}
+	res.json(json);
+});
+
 

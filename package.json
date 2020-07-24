@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app",
+    "service": "pm2 start app.js -i 0",
+    "kill": "pm2 kill"
   },
   "repository": {
     "type": "git",

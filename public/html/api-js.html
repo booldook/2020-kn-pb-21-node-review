@@ -14,7 +14,23 @@
 		<button id="bt-get" class="btn btn-primary">데이터 내보내기-GET</button>
 	</div>
 	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				console.log(JSON.parse(xhr.responseText));
+			}
+		}
 		
+		document.querySelector("#bt-post").addEventListener("click", function(){
+			xhr.open('post', '/api/save');
+			xhr.setRequestHeader('Content-type', 'application/json');
+			xhr.send(JSON.stringify({name: "홍길동", age: 25}));
+		});
+		
+		document.querySelector("#bt-get").addEventListener("click", function(){
+			xhr.open('get', '/api/save?name=홍길순&age=28');
+			xhr.send();
+		});
 	</script>
 </body>
 </html>

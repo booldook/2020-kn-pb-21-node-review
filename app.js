@@ -14,9 +14,13 @@ app.listen(process.env.PORT, () => {
 
 /**************** 경로 설정 ******************/
 const publicPath = path.join(__dirname, './public');
-console.log(publicPath);
+const viewsPath = path.join(__dirname, './views');
 
 /**************** 초기 설정 ******************/
+app.set('view engine', 'pug');
+app.set('views', viewsPath);
+app.locals.pretty = true;
+
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use("/", express.static(publicPath));

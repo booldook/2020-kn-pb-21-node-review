@@ -2,8 +2,10 @@ extends ../layout/default.layout.pug
 block title
 	h1.py-5= title
 block content
+	//- form.border(name="wrForm" method="post" action="/crud/save" onsubmit="return onSubmit(this);")
 	form.border(name="wrForm" method="post" action="/crud/save")
 		.p-3.form-inline
 			input.form-control.mr-2(type="text" name="name" placeholder="이름")
 			input.form-control.mr-2(type="number" name="age" placeholder="나이" min="0" max="255")
-			button.btn.btn-primary(type="submit") 저장
+			//- button.btn.btn-primary(type="submit" id="btSave") 저장
+			button.btn.btn-primary(type="button" id="btSave") 저장

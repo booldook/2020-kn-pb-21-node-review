@@ -1,0 +1,14 @@
+extends ../layout/default.layout.pug
+block title
+	h1.py-5= title
+block content
+	ul.lists.d-flex
+		each v in lists
+			li.p-3.m-3.border.rounded
+				span.mr-3= v.id
+				b.mr-3= v.name
+				b.mr-3= `${v.age}세`
+				span.mr-3= v.createdAt
+				.btn-group
+					button.btn.btn-success.btn-sm 수정
+					button.btn.btn-danger.btn-sm 삭제

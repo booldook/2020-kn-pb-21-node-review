@@ -1,9 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const { pool } = require('../modules/mysql-mod');
+const moment = require('moment');
 
-router.get(["/", "/li", "/li/:page"], (req, res, next) => { // 리스트를 보여주기/SELECT
-	res.send("리스트 페이지");
+router.get(["/", "/li", "/li/:page"], async (req, res, next) => { // 리스트를 보여주기/SELECT
+	let connect, sql, sqlVal, result, lists;
+	try {
+		sql = 'SELECT * FROM review ORDER BY id DESC';
+		connect = await pool.getConnection();
+		result = await connect.execute(sql);
+		connect.release();
+		lists = result[0].map((v) => {
+			v.createdAt = moment(v.createdAt).format('YYYY-MM-DD hh:mm:ss');
+			return v;
+		});
+		const pug = {title: "리스트", js: "crud", lists};
+		res.render("page/crud-li.pug", pug);
+	}
+	catch(e) {
+		console.log(e);
+		res.json(e);
+	}
 });
 
 router.get("/wr", (req, res, next) => { // 신규 작성 폼 보여주기/PUG

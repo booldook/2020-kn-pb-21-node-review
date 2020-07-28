@@ -36,8 +36,19 @@ router.get("/up/:id", (req, res, next) => { // 수정 폼 보여주기/PUG/SELEC
 	res.render('page/crud-wr.pug', pug);
 });
 
-router.get("/rev/:id", (req, res, next) => { // 삭제하기/DELETE
-
+router.get("/rev/:id", async (req, res, next) => { // 삭제하기/DELETE
+	let id = req.params.id;
+	let connect, sql, sqlVal, result;
+	try {
+		sql = 'DELETE FROM review WHERE id='+id;
+		connect = await pool.getConnection();
+		result = await connect.execute(sql);
+		res.redirect('/crud/li');
+	}
+	catch(e) {
+		console.log(e);
+		res.json(e);
+	}
 });
 
 router.post("/save", async (req, res, next) => { // 저장하기/INSERT

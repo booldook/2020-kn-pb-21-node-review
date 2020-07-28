@@ -30,3 +30,11 @@ function onSave() {
 	}
 	$f[0].submit();
 }
+
+function onChg(id) {
+	location.href = '/crud/up/'+id;
+}
+
+function onRev(id) {
+	if(confirm('삭제?')) location.href = '/crud/rev/'+id; 
+}

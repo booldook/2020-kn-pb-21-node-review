@@ -2,13 +2,15 @@ extends ../layout/default.layout.pug
 block title
 	h1.py-5= title
 block content
-	ul.lists.d-flex
+	ul.lists.d-flex.flex-wrap.justify-content-between
 		each v in lists
-			li.p-3.m-3.border.rounded
+			li.p-3.mb-3.border.rounded(style="flex: 49% 0 0;")
 				span.mr-3= v.id
 				b.mr-3= v.name
 				b.mr-3= `${v.age}세`
 				span.mr-3= v.createdAt
-				.btn-group
-					button.btn.btn-success.btn-sm 수정
-					button.btn.btn-danger.btn-sm 삭제
+				.btn-group.float-right
+					//- button.btn.btn-success.btn-sm(onclick=`location.href='/crud/up/${v.id}';`) 수정
+					//- button.btn.btn-danger.btn-sm(onclick=`if(confirm('삭제?')) location.href='/crud/rev/${v.id}';`) 삭제
+					button.btn.btn-success.btn-sm(onclick=`onChg(${v.id})`) 수정
+					button.btn.btn-danger.btn-sm(onclick=`onRev(${v.id})`) 삭제

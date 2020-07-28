@@ -10,11 +10,14 @@ router.get(["/", "/li", "/li/:page"], async (req, res, next) => { // 리스트�
 		connect = await pool.getConnection();
 		result = await connect.execute(sql);
 		connect.release();
-		lists = result[0].map((v) => {
+		/* lists = result[0].map((v) => {
 			v.createdAt = moment(v.createdAt).format('YYYY-MM-DD hh:mm:ss');
 			return v;
+		}); */
+		result[0].forEach((v) => {
+			v.createdAt = moment(v.createdAt).format('YYYY-MM-DD hh:mm:ss');
 		});
-		const pug = {title: "리스트", js: "crud", lists};
+		const pug = {title: "리스트", js: "crud", lists: result[0]};
 		res.render("page/crud-li.pug", pug);
 	}
 	catch(e) {

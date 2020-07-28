@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../modules/mysql-mod');
 const moment = require('moment');
+let connect, sql, sqlVal, result;
 
 router.get(["/", "/li", "/li/:page"], async (req, res, next) => { // 리스트를 보여주기/SELECT
-	let connect, sql, sqlVal, result, lists;
 	try {
 		sql = 'SELECT * FROM review ORDER BY id DESC';
 		connect = await pool.getConnection();
@@ -31,14 +31,24 @@ router.get("/wr", (req, res, next) => { // 신규 작성 폼 보여주기/PUG
 	res.render('page/crud-wr.pug', pug);
 });
 
-router.get("/up/:id", (req, res, next) => { // 수정 폼 보여주기/PUG/SELECT
-	const pug = {title: "글 수정", js: "crud"}; 
-	res.render('page/crud-wr.pug', pug);
+router.get("/up/:id", async (req, res, next) => { // 수정 폼 보여주기/PUG/SELECT
+	let id = req.params.id;
+	try {
+		sql = 'SELECT * FROM review WHERE id='+id;
+		connect = await pool.getConnection();
+		result = await connect.execute(sql);
+		connect.release();
+		const pug = {title: "글 수정", js: "crud", list: result[0][0]}; 
+		res.render('page/crud-wr.pug', pug);
+	}
+	catch(e) {
+		console.log(e);
+		res.json(e);
+	}
 });
 
 router.get("/rev/:id", async (req, res, next) => { // 삭제하기/DELETE
 	let id = req.params.id;
-	let connect, sql, sqlVal, result;
 	try {
 		sql = 'DELETE FROM review WHERE id='+id;
 		connect = await pool.getConnection();
@@ -52,11 +62,16 @@ router.get("/rev/:id", async (req, res, next) => { // 삭제하기/DELETE
 });
 
 router.post("/save", async (req, res, next) => { // 저장하기/INSERT
-	let { name, age } = req.body;
-	let connect, sql, sqlVal, result;
+	let { name, age, id } = req.body;
 	try {
-		sql = 'INSERT INTO review SET name=?, age=?';
-		sqlVal = [name, age];
+		if(id) {
+			sql = 'UPDATE review SET name=?, age=? WHERE id=?';
+			sqlVal = [name, age, id];
+		} 
+		else {
+			sql = 'INSERT INTO review SET name=?, age=?';
+			sqlVal = [name, age];
+		}
 		connect = await pool.getConnection();
 		result = await connect.execute(sql, sqlVal);
 		connect.release();

@@ -5,7 +5,13 @@ block content
 	//- form.border(name="wrForm" method="post" action="/crud/save" onsubmit="return onSubmit(this);")
 	form.border(name="wrForm" method="post" action="/crud/save")
 		.p-3.form-inline
-			input.form-control.mr-2(type="text" name="name" placeholder="이름")
-			input.form-control.mr-2(type="number" name="age" placeholder="나이" min="0" max="255")
-			//- button.btn.btn-primary(type="submit" id="btSave") 저장
-			button.btn.btn-primary(type="button" id="btSave") 저장
+			if list
+				input(type="hidden" name="id" value=`${list.id}`)
+				input.form-control.mr-2(type="text" name="name" placeholder="이름" value=`${list.name}`)
+				input.form-control.mr-2(type="number" name="age" placeholder="나이" value=`${list.age}`)
+				button.btn.btn-success(type="button" id="btSave") 수정
+			else
+				input.form-control.mr-2(type="text" name="name" placeholder="이름")
+				input.form-control.mr-2(type="number" name="age" placeholder="나이")
+				button.btn.btn-primary(type="button" id="btSave") 저장
+				//- button.btn.btn-primary(type="submit" id="btSave") 저장
